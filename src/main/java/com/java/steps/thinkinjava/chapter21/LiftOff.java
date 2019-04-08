@@ -1,6 +1,5 @@
 package com.java.steps.thinkinjava.chapter21;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -8,12 +7,12 @@ import java.util.concurrent.Executors;
  * @Author: Stupid Boy
  * @Date: 2018/12/19 11:23
  * @Version 1.0
- * @Description:ÊµÏÖRunnableµÄÈÎÎñ
+ * @Description:å®ç°Runnableçš„ä»»åŠ¡
  */
 public class LiftOff implements Runnable {
-    private static int taskCount = 0;   //ÈÎÎñ¼ÆÊı
-    private final int id = taskCount++;     //ÈÎÎñID
-    protected int countDown = 5;   //µ¹¼ÆÊ±
+    private static int taskCount = 0;   //ä»»åŠ¡è®¡æ•°
+    private final int id = taskCount++;     //ä»»åŠ¡ID
+    protected int countDown = 5;   //å€’è®¡æ—¶
 
     public LiftOff() {
     }
@@ -24,18 +23,18 @@ public class LiftOff implements Runnable {
 
     public String Status() {
         return "#" + id + "(" + (countDown > 0 ? countDown : "LiftOff!") + ")";
-        //Êä³ö¸ñÊ½:#0(10)¡­¡­
+        //è¾“å‡ºæ ¼å¼:#0(10)â€¦â€¦
     }
 
     public void run() {
         while (countDown-- > 0) {
             System.out.println(Status());
-            Thread.yield(); //½«CPU×ªÒÆµ½ÆäËûÏß³Ì£¬ÕâÖÖ×ªÒÆÊÇÓÉµ÷¶È»úÖÆ¾ö¶¨µÄ£¬Ö»ÊÇ½¨Òé£¬ÄÜÕ¹Ê¾³öÈÎÎñµ÷Èëµ÷³öµÄÖ¤¾İ
+            Thread.yield(); //å°†CPUè½¬ç§»åˆ°å…¶ä»–çº¿ç¨‹ï¼Œè¿™ç§è½¬ç§»æ˜¯ç”±è°ƒåº¦æœºåˆ¶å†³å®šçš„ï¼Œåªæ˜¯å»ºè®®ï¼Œèƒ½å±•ç¤ºå‡ºä»»åŠ¡è°ƒå…¥è°ƒå‡ºçš„è¯æ®
         }
     }
 }
 
-//Ä£ÄâÏß³ÌÇı¶¯£¬ÓÉmain()Ö±½Óµ÷ÓÃ
+//æ¨¡æ‹Ÿçº¿ç¨‹é©±åŠ¨ï¼Œç”±main()ç›´æ¥è°ƒç”¨
 class MainThread {
     public static void main(String[] args) {
         LiftOff launch = new LiftOff();
@@ -43,42 +42,42 @@ class MainThread {
     }
 }
 
-//ÒªÊµÏÖÏß³ÌĞĞÎª£¬ĞèÒªÏÔÊ½µØ½«Ò»¸öÈÎÎñ¸½µ½Ïß³ÌÉÏ£¬±ÈÈçÌá½»¸øThread¹¹ÔìÆ÷
+//è¦å®ç°çº¿ç¨‹è¡Œä¸ºï¼Œéœ€è¦æ˜¾å¼åœ°å°†ä¸€ä¸ªä»»åŠ¡é™„åˆ°çº¿ç¨‹ä¸Šï¼Œæ¯”å¦‚æäº¤ç»™Threadæ„é€ å™¨
 class BasicThreads {
     public static void main(String[] args) {
         Thread t = new Thread(new LiftOff());
-        t.start();  //start()·½·¨Ñ¸ËÙ·µ»Ø£¬ÏÈÖ´ĞĞÏÂÒ»¸öÊä³ö   -->µ÷ÓÃLiftOff.run()·½·¨£¬ÓÉÆäËûÏß³ÌÖ´ĞĞ£¬Óëmain()"Í¬Ê±"Ö´ĞĞ
-        System.out.println("Waiting for LiftOff¡­¡­");
+        t.start();  //start()æ–¹æ³•è¿…é€Ÿè¿”å›ï¼Œå…ˆæ‰§è¡Œä¸‹ä¸€ä¸ªè¾“å‡º   -->è°ƒç”¨LiftOff.run()æ–¹æ³•ï¼Œç”±å…¶ä»–çº¿ç¨‹æ‰§è¡Œï¼Œä¸main()"åŒæ—¶"æ‰§è¡Œ
+        System.out.println("Waiting for LiftOffâ€¦â€¦");
     }
 }
 
-//¶àÏß³Ì,ÓÉÓÚµ÷¶ÈµÄ·ÇÈ·¶¨ĞÔ,Ã¿´ÎÖ´ĞĞ½á¹û²»Ò»¶¨ÏàÍ¬
+//å¤šçº¿ç¨‹,ç”±äºè°ƒåº¦çš„éç¡®å®šæ€§,æ¯æ¬¡æ‰§è¡Œç»“æœä¸ä¸€å®šç›¸åŒ
 class MoreBasicThreads {
     public static void main(String[] args) {
         for (int i = 0; i < 5; i++) {
             Thread t = new Thread(new LiftOff());
             t.start();
         }
-        System.out.println("Waiting for LiftOff¡­¡­");
+        System.out.println("Waiting for LiftOffâ€¦â€¦");
     }
 }
-//Á·Ï°£ºP689
+//ç»ƒä¹ ï¼šP689
 
-//Ê¹ÓÃExecutor¹ÜÀíThread¶ÔÏó£¬¼ò»¯²¢·¢±à³Ì£¬ÊÇÆô¶¯ÈÎÎñµÄÓÅÑ¡·½·¨.Ê¹ÓÃµ¥¸öµÄExecutorÀ´´´½¨ºÍ¹ÜÀíÏµÍ³ÖĞµÄËùÓĞÈÎÎñºÜ³£¼û
+//ä½¿ç”¨Executorç®¡ç†Threadå¯¹è±¡ï¼Œç®€åŒ–å¹¶å‘ç¼–ç¨‹ï¼Œæ˜¯å¯åŠ¨ä»»åŠ¡çš„ä¼˜é€‰æ–¹æ³•.ä½¿ç”¨å•ä¸ªçš„Executoræ¥åˆ›å»ºå’Œç®¡ç†ç³»ç»Ÿä¸­çš„æ‰€æœ‰ä»»åŠ¡å¾ˆå¸¸è§
 
 class CachedThreadPool {
     public static void main(String[] args) {
         ExecutorService exe = Executors.newCachedThreadPool();
         exe = Executors.newFixedThreadPool(5);
         exe = Executors.newSingleThreadExecutor();
-        /*CachedThreadPool Í¨³£»á´´½¨ËùĞèÊıÁ¿µÄÏß³Ì£¬ÔÚ»ØÊÕ¾ÉÏß³ÌÊ±»áÍ£Ö¹ĞÂÏß³ÌµÄ´´½¨£¬Ê×Ñ¡
-         *FixedThreadPool Ò»´ÎĞÔÍê³ÉÏß³Ì·ÖÅä£¬ÏŞÖÆÏß³ÌµÄÊıÁ¿£¬¿ÉÒÔ½ÚÔ¼Ê±¼ä
-         * SingleThreadExecutor ÀàËÆÊıÁ¿Îª1µÄFixedThreadPool£¬Ìá½»¶à¸öÈÎÎñÊ±£¬»áÅÅ¶Ó£¬ÕâÖÖ·½Ê½²»ĞèÒªÔÚ×ÊÔ´ÉÏ´¦ÀíÍ¬²½
+        /*CachedThreadPool é€šå¸¸ä¼šåˆ›å»ºæ‰€éœ€æ•°é‡çš„çº¿ç¨‹ï¼Œåœ¨å›æ”¶æ—§çº¿ç¨‹æ—¶ä¼šåœæ­¢æ–°çº¿ç¨‹çš„åˆ›å»ºï¼Œé¦–é€‰
+         *FixedThreadPool ä¸€æ¬¡æ€§å®Œæˆçº¿ç¨‹åˆ†é…ï¼Œé™åˆ¶çº¿ç¨‹çš„æ•°é‡ï¼Œå¯ä»¥èŠ‚çº¦æ—¶é—´
+         * SingleThreadExecutor ç±»ä¼¼æ•°é‡ä¸º1çš„FixedThreadPoolï¼Œæäº¤å¤šä¸ªä»»åŠ¡æ—¶ï¼Œä¼šæ’é˜Ÿï¼Œè¿™ç§æ–¹å¼ä¸éœ€è¦åœ¨èµ„æºä¸Šå¤„ç†åŒæ­¥
          */
         for (int i = 0; i < 5; i++) {
             exe.execute(new LiftOff());
         }
-        System.out.println("Waiting for LiftOff¡­¡­");
+        System.out.println("Waiting for LiftOffâ€¦â€¦");
         exe.shutdown();
     }
 }
