@@ -30,6 +30,7 @@ public class SplitString {
         Scanner input = new Scanner(System.in);
         String str1 = input.nextLine();
         String str2 = input.nextLine();
+        input.close();
         main.splitString(str1);
         main.splitString(str2);
     }

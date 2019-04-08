@@ -1,7 +1,5 @@
 package com.java.steps.nowCoder;
 
-import java.util.Scanner;
-
 public class StringLengthCal {
     public int calLastStringLength(String str) {
         String[] tmp = str.split(" ");
@@ -13,7 +11,7 @@ public class StringLengthCal {
         String str = "XSUWHQ 12 ";
         System.out.println(stringLengthCal.calLastStringLength(str));
 
-        Scanner input = new Scanner(System.in);
+        // Scanner input = new Scanner(System.in);
     }
 }
 //题目描述

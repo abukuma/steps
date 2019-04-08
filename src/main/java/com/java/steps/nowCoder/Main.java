@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String string = scanner.nextLine();
+        scanner.close();
         String[] str = string.split(" ");
         int size = Integer.parseInt(str[0]);
         int mergeNum = 0;

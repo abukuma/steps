@@ -26,6 +26,7 @@ public class BinaryConversion {
             count = 0;
             str = input.nextLine();
         }
+        input.close();
     }
 }
 /**

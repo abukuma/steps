@@ -21,6 +21,7 @@ public class TableMerge {
                 map.put(str.charAt(0) - 48, mergeNum);
             }
         }
+        scanner.close();
         for (Map.Entry<Integer, Integer> entry : map.entrySet()
         ) {
             System.out.println(entry.getKey() + " " + entry.getValue());

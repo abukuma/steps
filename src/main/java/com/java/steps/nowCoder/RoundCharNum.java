@@ -6,6 +6,7 @@ public class RoundCharNum {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Double number = scanner.nextDouble();
+        scanner.close();
         String str = number.toString();
         //需要进行转义
         String[] split = str.split("\\.");

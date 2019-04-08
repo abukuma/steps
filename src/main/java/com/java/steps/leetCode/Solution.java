@@ -3,19 +3,19 @@ package com.java.steps.leetCode;
 import java.util.*;
 
 /**
- * @Author £ºStupid Boy
- * @Date £º2019/4/7 16:23
- * @Version £º1.0
+ * @Author ï¼šStupid Boy
+ * @Date ï¼š2019/4/7 16:23
+ * @Version ï¼š1.0
  * @Description:
  */
 public class Solution {
     /**
-     * ÕÒ³öÊı×éÖĞ²»ÖØ¸´µÄÄÇ¸öÊı£¨Òì»ò£¬hashset£©
+     * æ‰¾å‡ºæ•°ç»„ä¸­ä¸é‡å¤çš„é‚£ä¸ªæ•°ï¼ˆå¼‚æˆ–ï¼Œhashsetï¼‰
      * @param nums
      * @return
      */
     public static int singleNumber(int[] nums) {
-        Map<Integer,Integer> map = new HashMap();
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
         int target = 0;
         for(int i = 0;i<nums.length;i++){
             if(map.containsValue(nums[i])){
@@ -33,7 +33,7 @@ public class Solution {
     }
 
     /**
-     * ÕÒ³öÖÚÊı
+     * æ‰¾å‡ºä¼—æ•°
      * @param nums
      * @return
      */
@@ -58,7 +58,7 @@ public class Solution {
     }
 
     /**
-     * ËÑË÷¶şÎ¬¾ØÕó£¬ºáÊúµİÔö
+     * æœç´¢äºŒç»´çŸ©é˜µï¼Œæ¨ªç«–é€’å¢
      * @param matrix
      * @param target
      * @return
@@ -83,7 +83,7 @@ public class Solution {
     }
 
     /**
-     * ÍâÅÅ
+     * å¤–æ’
      * @param nums1
      * @param m
      * @param nums2
