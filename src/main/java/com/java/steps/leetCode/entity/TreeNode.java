@@ -1,4 +1,4 @@
-package com.java.steps.leetCode;
+package com.java.steps.leetCode.entity;
 /**
  * 树节点
  */
