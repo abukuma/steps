@@ -1,6 +1,10 @@
 package com.java.steps.leetCode;
-
+import com.java.steps.javase.WeekEnum;
 import java.util.*;
+import java.util.Map.Entry;
+
+
+
 
 /**
  * @Author ：Stupid Boy
@@ -10,15 +14,236 @@ import java.util.*;
  */
 public class Solution {
     public static void main(String[] args) {
-        List<String> wordDict = new ArrayList<String>();
-        wordDict.add("aaa");
-        wordDict.add("aaaa");
-        // System.out.println(wordBreak(s, wordDict));
-        int[] nums = { 1, 2 };
-        nums = plusOne(nums);
-        for (int var : nums) {
-            System.out.println(var);
+        /**TreeNode root = new TreeNode(1);
+        TreeNode node1 = new TreeNode(2);
+        TreeNode node2 = new TreeNode(3);
+        root.right = node1;
+        node1.left =node2;
+        List<Integer> list = inorderTraversal(root);
+        System.out.println(list.toString());*/
+        // Stack<Integer> stack = new Stack<Integer>();
+        // Queue<String> queue = new LinkedBlockingQueue<String>();
+        
+        for(WeekEnum weekEnum:WeekEnum.values())
+        System.out.println(weekEnum.name());
+    }
+
+    /**
+     * 除数博弈
+     * @param N
+     * @return
+     */
+    public boolean divisorGame(int N) {
+        List<Integer> result = new ArrayList<Integer>();
+        result = next(N, result, 1);
+        // for(int a: result){
+        //     if(a%2==1) 
+        // }
+        return true;
+    }
+
+    public static List<Integer> next(int N,List<Integer> arr,int count){
+        if(N==1) {
+            arr.add(count++);
+            return arr;
         }
+        int[] result = findNum(N);
+        for(int a:result){
+            while(a!=0){
+                next(N-a,arr,count++);
+            }
+
+        }
+        return null;
+    }
+
+    /**
+     * 找出因数
+     * @param N
+     * @return
+     */
+    public static int[] findNum(int N){
+        int[] result = new int[N];
+        for(int i=1,j=0;i<N;i++){
+            if(N%i==0) result[j++]=i;
+        }
+        return result;
+    }
+
+    /**
+     * 马落在棋盘的概率
+     * @param N N*N的棋盘
+     * @param K 移动步数
+     * @param r 初始横坐标
+     * @param c 初始纵坐标
+     * @return
+     */
+    public double knightProbability(int N, int K, int r, int c) {
+        double probability = 0;
+
+        return probability;
+    }
+
+    // public static double move(int N, int K, int r, int c){
+    //     if(K==1) return calculate(N, r, c);
+    // }
+
+    public static double calculate(int N,int r, int c){
+        double successRoute = 0;
+        if(r-2>=0 && c-1>=0) {
+            successRoute++;
+        }
+        if(r-2>=0 && c+1<N) {
+            successRoute++;
+        }
+        if(r+2<N && c-1>=0) {
+            successRoute++;
+        }
+        if(r+2<N && c+1<N) {
+            successRoute++;
+        }
+        if(r-1>=0 && c-2>=0) {
+            successRoute++;
+        }
+        if(r-1>=0 && c+2<N) {
+            successRoute++;
+        }
+        if(r+1<N && c-2>=0) {
+            successRoute++;
+        }
+        if(r+1<N && c+2<N) {
+            successRoute++;
+        }         
+        double result = successRoute/8;
+        return result;
+    }
+
+    
+
+    /**
+     * 构造矩形，长宽差值最小
+     * @param area
+     * @return
+     */
+    public int[] constructRectangle(int area) {
+        int[] result = new int[2];
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+        for(int i =1;i<=Math.sqrt(area);i++){
+            if(area%i==0) map.put(area/i,i);
+        }
+        int minKey=0;
+        int distance=area;
+        for(Entry<Integer,Integer> entry:map.entrySet()){
+            if(entry.getKey()-entry.getValue()<distance){
+                distance = entry.getKey()-entry.getValue();
+                minKey = entry.getKey();
+            }
+        }
+        result[0]=minKey;
+        result[1]=map.get(minKey);
+        return result;
+    }
+
+    /**
+     * 输出前K出现频率的元素
+     * @param nums
+     * @param k
+     * @return
+     */
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+        List<Integer> list = new ArrayList<Integer>();
+        for(int a:nums){
+            if(map.containsKey(a)){
+                map.put(a,map.get(a)+1);
+            }else{
+                map.put(a,1);
+            }
+        }
+        List<Entry<Integer,Integer>> sortList = new LinkedList<Entry<Integer,Integer>>(map.entrySet());
+        Collections.sort(sortList, new Comparator<Entry<Integer,Integer>>() {
+            @Override
+            public int compare(Entry<Integer,Integer> o1, Entry<Integer,Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        int size = sortList.size();
+        for(int i = size-1;i>=size-k;i--){
+            list.add(sortList.get(i).getKey());
+        }
+        return list;
+    }
+
+    /**
+     * 根据字符出现频率排序
+     * @param s
+     * @return
+     */
+    public static String frequencySort(String s) {
+        StringBuilder builder = new StringBuilder();
+        Map<Character,Integer> map = new HashMap<Character,Integer>();
+        for(char c: s.toCharArray()){
+            if(map.containsKey(c)){
+                map.put(c, map.get(c)+1);
+            }else {
+                map.put(c, 1);
+            }
+        }
+        List<Entry<Character,Integer>> list = new LinkedList<Entry<Character,Integer>>(map.entrySet());
+        Collections.sort(list, new Comparator<Entry<Character,Integer>>() {
+            public int compare(Entry<Character,Integer> o1, Entry<Character,Integer> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        for (Entry<Character,Integer> entry : list) {
+            for(int i=0;i<entry.getValue();i++){
+                builder.append(entry.getKey());
+            }
+        }
+        
+        return builder.reverse().toString();
+    }
+
+    /**
+     * 
+     */
+    public int[] twoSum(int[] nums, int target) {
+        int[] result = new int[2];
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                result[1] = i;
+                result[0] = map.get(target - nums[i]);
+                return result;
+            }
+            map.put(nums[i], i);
+        }
+        return result;
+
+    }
+
+
+    /**
+     * 对角线遍历二维数组
+     * 
+     * @param matrix
+     * @return
+     */
+    public int[] findDiagonalOrder(int[][] matrix) {
+        int M = matrix.length;
+        if (M == 0)
+            return null;
+        int N = matrix[0].length;
+        int i = 0, j = 0;
+        int[] result = new int[M * N];
+
+        for (int count = 0; count < M + N; count++) {
+            while (i < M && j < N) {
+
+            }
+        }
+        return result;
     }
 
     /**
@@ -220,78 +445,11 @@ public class Solution {
      * @param nums
      * @return
      */
-    public static int majorityElement(int[] nums) {
-        int size = nums.length;
-        Set<Integer> set = new HashSet<Integer>();
-        for (int a : nums)
-            set.add(a);
-        for (int b : set.toArray(new Integer[set.size()])) {
-            int count = 0;
-            for (int j = 0; j < size; j++) {
-                if (b == nums[j]) {
-                    count++;
-                }
-            }
-            if (count <= size / 2) {
-                set.remove(b);
-            }
-        }
 
-        return set.toArray(new Integer[set.size()])[0];
-    }
 
-    /**
-     * 搜索二维矩阵，横竖递增
-     * 
-     * @param matrix
-     * @param target
-     * @return
-     */
-    public boolean searchMatrix(int[][] matrix, int target) {
-        int size = matrix.length;
-        if (size == 0)
-            return false;
-        int length = matrix[0].length;
-        int i = 0;
-        int j = length - 1;
-        while (i < size && j >= 0) {
-            if (matrix[i][j] == target)
-                return true;
-            else if (matrix[i][j] > target) {
-                j--;
-            } else if (matrix[i][j] < target) {
-                i++;
-            }
-        }
-        return false;
-    }
+    
 
-    /**
-     * 外排
-     * 
-     * @param nums1
-     * @param m
-     * @param nums2
-     * @param n
-     */
-    public static void merge(int[] nums1, int m, int[] nums2, int n) {
-        int i = 0, j = 0, t = 0, p = 0;
-        int[] tmp = new int[m];
-        while (i < m && j < n) {
-            if (nums1[i] <= nums2[j]) {
-                tmp[t++] = nums1[i++];
-            } else {
-                tmp[t++] = nums2[j++];
-            }
-        }
-        while (i < m)
-            tmp[t++] = nums1[i++];
-        while (j < n)
-            tmp[t++] = nums2[j++];
-        for (int a : tmp) {
-            nums1[p++] = a;
-        }
-    }
+    
 
     /**
      * 鸡蛋下落问题
